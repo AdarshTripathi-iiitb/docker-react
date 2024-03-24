@@ -1,0 +1,55 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Certainly! This docker-compose.yml file is used to define a Docker service called web. Let's break down each section:
+
+# version: '3': This specifies the version of the Docker Compose file format being used. In this case, it's version 3, which is a widely used version with support for many features.
+
+# services: This is a section where you define the services (containers) that make up your application.
+
+# web: This is the name of the service being defined. You can have multiple services defined in a single docker-compose.yml file.
+
+# build: This section is used to specify how to build the Docker image for this service.
+
+# context: .: This specifies the build context, which is the path to the directory containing the Dockerfile and any other files needed for building the image. Here, . refers to the current directory.
+# dockerfile: Dockerfile.dev: This specifies the name of the Dockerfile to use for building the image. Here, it's Dockerfile.dev located in the build context directory.
+# ports: This section is used to map ports between the host machine and the container.
+
+# - "3000:3000": This maps port 3000 on the host machine to port 3000 on the container. The format is "host_port:container_port".
+# volumes: This section is used to mount volumes from the host machine into the container.
+
+# - /app/node_modules: This is a volume mount for the /app/node_modules directory in the container. This is typically done to speed up development by avoiding unnecessary reinstallation of dependencies.
+# - .:/app: This is a volume mount for the current directory (.) on the host machine to the /app directory in the container. This allows you to make changes to your code on the host machine and have them reflected in the container without rebuilding the image.
+# Overall, this docker-compose.yml file defines a Docker service for a web application, builds it using a specified Dockerfile.dev, maps port 3000 between the host and the container, and mounts volumes for node_modules and the application code.
